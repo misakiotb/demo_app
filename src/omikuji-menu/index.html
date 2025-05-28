@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>開運おみくじ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>開運おみくじ</h1>
+        <button id="drawButton">おみくじを引く</button>
+        <div id="loadingAnimation" class="hidden">
+            <p>運勢を占っています...</p>
+            <div class="spinner"></div>
+        </div>
+        <div id="result" class="hidden">
+            <h2>結果</h2>
+            <p id="fortuneText"></p>
+            <p id="menuText"></p>
+            <p id="colorText"></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

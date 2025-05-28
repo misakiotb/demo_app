@@ -1,0 +1,110 @@
+body {
+    font-family: 'Shippori Mincho', serif;
+    background-color: #f3e9e0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #3a2b24;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 5px solid #c70039;
+}
+
+h1 {
+    color: #b90000;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+button {
+    background-color: #b90000;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #9e0000;
+}
+
+#loadingAnimation p {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border-left-color: #b90000;
+    animation: spin 1s ease infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#result {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #fffaf0;
+    border: 2px solid #e6a420;
+    border-radius: 8px;
+}
+
+#result h2 {
+    color: #b90000;
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+#fortuneText {
+    font-size: 2em;
+    font-weight: bold;
+    color: #3a2b24;
+    margin-bottom: 10px;
+}
+
+#menuText, #colorText {
+    font-size: 1.3em;
+    color: #5c4b43;
+    margin: 15px 0;
+}
+
+.highlight {
+    color: #b90000;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+#result {
+    transition: border-color 0.5s ease;
+}
+
+.hidden {
+    display: none;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700&display=swap');

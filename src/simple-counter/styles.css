@@ -1,0 +1,110 @@
+/* 全体のスタイル */
+body {
+    font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+    background-color: #f0f7ff;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+}
+
+/* コンテナ */
+.container {
+    text-align: center;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    max-width: 90%;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* 見出し */
+h1 {
+    color: #4a6fa5;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+/* カウンター表示 */
+.counter-display {
+    font-size: 5rem;
+    font-weight: bold;
+    color: #ff6b6b;
+    margin: 1.5rem 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* ボタンコンテナ */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* ボタン共通スタイル */
+.btn {
+    border: none;
+    padding: 0.8rem 1.8rem;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ボタンホバー時 */
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ボタンアクティブ時 */
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* プラスボタン */
+.increment-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.increment-btn:hover {
+    background-color: #45a049;
+}
+
+/* リセットボタン */
+.reset-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.reset-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* アクセシビリティ対応 */
+:focus {
+    outline: 3px solid #ffd700;
+    outline-offset: 2px;
+}
+
+/* アニメーション */
+@keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.counter-animation {
+    animation: pop 0.3s ease;
+}
