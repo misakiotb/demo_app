@@ -89,11 +89,11 @@ h1 {
 .app-icon {
     font-size: 3rem;
     margin-bottom: 1.5rem;
-    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
+    /* background: linear-gradient(45deg, var(--primary-color), var(--accent-color)); */
+    /* -webkit-background-clip: text; */
+    /* -webkit-text-fill-color: transparent; */
+    /* background-clip: text; */
+    color: var(--text-color); /* 通常のテキスト色を適用 */
     display: inline-block;
 }
 

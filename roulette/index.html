@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メガネルーレット</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: white;
+        }
+
+        .title {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        .roulette-container {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            margin-bottom: 40px;
+        }
+
+        .roulette-wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 8px solid #fff;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+            transition: transform ease-out;
+            transform-origin: center;
+            background: conic-gradient(
+                #ff6b6b 0deg 45deg,
+                #4ecdc4 45deg 90deg,
+                #45b7d1 90deg 135deg,
+                #96ceb4 135deg 180deg,
+                #feca57 180deg 225deg,
+                #ff9ff3 225deg 270deg,
+                #54a0ff 270deg 315deg,
+                #5f27cd 315deg 360deg
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .glasses-item {
+            position: absolute;
+            font-size: 3rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            color: white;
+            transform-origin: center;
+        }
+
+        .glasses-item:nth-child(1) { transform: rotate(22.5deg) translateY(-180px) rotate(-22.5deg); }
+        .glasses-item:nth-child(2) { transform: rotate(67.5deg) translateY(-180px) rotate(-67.5deg); }
+        .glasses-item:nth-child(3) { transform: rotate(112.5deg) translateY(-180px) rotate(-112.5deg); }
+        .glasses-item:nth-child(4) { transform: rotate(157.5deg) translateY(-180px) rotate(-157.5deg); }
+        .glasses-item:nth-child(5) { transform: rotate(202.5deg) translateY(-180px) rotate(-202.5deg); }
+        .glasses-item:nth-child(6) { transform: rotate(247.5deg) translateY(-180px) rotate(-247.5deg); }
+        .glasses-item:nth-child(7) { transform: rotate(292.5deg) translateY(-180px) rotate(-292.5deg); }
+        .glasses-item:nth-child(8) { transform: rotate(337.5deg) translateY(-180px) rotate(-337.5deg); }
+
+        .pointer {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-top: 40px solid #fff;
+            z-index: 10;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+        }
+
+        .controls {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            padding: 20px 40px;
+            font-size: 2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .start-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: white;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.4);
+        }
+
+        .start-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .stop-btn {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+        }
+
+        .stop-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.4);
+        }
+
+        .stop-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result {
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.3);
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .result.winner {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #333;
+            text-shadow: none;
+            animation: glow 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(255,215,0,0.5); }
+            to { box-shadow: 0 0 40px rgba(255,215,0,0.8); }
+        }
+
+        @keyframes finalSpin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .final-animation {
+            animation: finalSpin 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">🤓 メガネルーレット 🤓</div>
+    
+    <div class="roulette-container">
+        <div class="pointer"></div>
+        <div class="roulette-wheel" id="wheel">
+            <div class="glasses-item">👓</div>
+            <div class="glasses-item">🕶️</div>
+            <div class="glasses-item">🥽</div>
+            <div class="glasses-item">👓</div>
+            <div class="glasses-item">🕶️</div>
+            <div class="glasses-item">🥽</div>
+            <div class="glasses-item">👓</div>
+            <div class="glasses-item">🕶️</div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="btn start-btn" id="startBtn">スタート</button>
+        <button class="btn stop-btn" id="stopBtn" disabled>ストップ</button>
+    </div>
+
+    <div class="result" id="result">ボタンを押してスタート！</div>
+
+    <script>
+        const wheel = document.getElementById('wheel');
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const result = document.getElementById('result');
+
+        const glassesTypes = [
+            { emoji: '👓', name: 'クラシックメガネ' },
+            { emoji: '🕶️', name: 'サングラス' },
+            { emoji: '🥽', name: 'ゴーグル' },
+            { emoji: '👓', name: 'ビジネスメガネ' },
+            { emoji: '🕶️', name: 'ファッションサングラス' },
+            { emoji: '🥽', name: 'スポーツゴーグル' },
+            { emoji: '👓', name: 'リーディンググラス' },
+            { emoji: '🕶️', name: 'アビエーターサングラス' }
+        ];
+
+        let isSpinning = false;
+        let currentRotation = 0;
+        let spinSpeed = 0;
+        let animationId = null;
+
+        function startSpin() {
+            if (isSpinning) return;
+            
+            isSpinning = true;
+            startBtn.disabled = true;
+            stopBtn.disabled = false;
+            result.textContent = 'スピン中...';
+            result.classList.remove('winner');
+            
+            spinSpeed = 8; // 初期スピード
+            spin();
+        }
+
+        function spin() {
+            currentRotation += spinSpeed;
+            wheel.style.transform = `rotate(${currentRotation}deg)`;
+            
+            if (isSpinning) {
+                animationId = requestAnimationFrame(spin);
+            }
+        }
+
+        function stopSpin() {
+            if (!isSpinning) return;
+            
+            stopBtn.disabled = true;
+            
+            // だんだんスピードを落とす
+            const decelerate = () => {
+                spinSpeed *= 0.98; // スピードを徐々に落とす
+                currentRotation += spinSpeed;
+                wheel.style.transform = `rotate(${currentRotation}deg)`;
+                
+                if (spinSpeed > 0.1) {
+                    animationId = requestAnimationFrame(decelerate);
+                } else {
+                    // 最終的な位置を計算
+                    const finalRotation = currentRotation % 360;
+                    const sectorAngle = 360 / 8;
+                    const selectedIndex = Math.floor((360 - finalRotation + sectorAngle/2) / sectorAngle) % 8;
+                    
+                    // 確定演出
+                    wheel.classList.add('final-animation');
+                    
+                    setTimeout(() => {
+                        wheel.classList.remove('final-animation');
+                        showResult(selectedIndex);
+                    }, 1000);
+                }
+            };
+            
+            cancelAnimationFrame(animationId);
+            decelerate();
+        }
+
+        function showResult(index) {
+            const selectedGlasses = glassesTypes[index];
+            result.innerHTML = `${selectedGlasses.emoji}<br>${selectedGlasses.name}`;
+            result.classList.add('winner');
+            
+            isSpinning = false;
+            startBtn.disabled = false;
+            stopBtn.disabled = true;
+        }
+
+        startBtn.addEventListener('click', startSpin);
+        stopBtn.addEventListener('click', stopSpin);
+    </script>
+</body>
+</html>
