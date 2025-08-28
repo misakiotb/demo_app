@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚔️ Zanntask - 侍のタスク管理</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-container">
+        <h1 class="title">⚔️ Zanntask</h1>
+        <div class="add-task-form">
+            <input type="text" id="task-input" placeholder="新しいタスクを入力...">
+            <input type="date" id="due-date-input">
+            <button id="add-btn">追加</button>
+        </div>
+        <div id="task-canvas" class="task-canvas"></div>
+    </div>
+
+    <!-- 居合斬りエフェクト用 -->
+    <div id="slash-effect" class="slash-effect hidden">
+        <div class="slash-line"></div>
+        <div class="particles"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
