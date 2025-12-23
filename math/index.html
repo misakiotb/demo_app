@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>算数ゲーム - 初級編</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>算数ゲーム - 初級編</h1>
+        <div class="game-info">
+            <div class="question-counter">問題 <span id="currentQuestion">1</span> / 10</div>
+            <div class="score">正解数: <span id="score">0</span></div>
+        </div>
+        
+        <div class="game-area" id="gameArea">
+            <div class="question">
+                <span id="num1">5</span> + <span id="num2">3</span> = ?
+            </div>
+            
+            <div class="answer-cards">
+                <button class="card" id="card1">8</button>
+                <button class="card" id="card2">12</button>
+                <button class="card" id="card3">7</button>
+                <button class="card" id="card4">9</button>
+                <button class="card" id="card5">6</button>
+            </div>
+            
+            <div class="result" id="result"></div>
+        </div>
+        
+        <div class="final-result" id="finalResult" style="display: none;">
+            <h2>ゲーム終了！</h2>
+            <p id="finalScore">5/10 正解！</p>
+            <button onclick="restartGame()">もう一度プレイ</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
